@@ -9,13 +9,12 @@ const config = {
 };
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
-
 const sql = `INSERT INTO people(name) values('Rodolfo')`
-connection.query(sql)
-
 const sql2 = `SELECT name FROM people`
 
+
 app.get('/', (req,res) =>  {
+    connection.query(sql)
     connection.query(sql2, function (err, rows) {
       if (err) {
         console.log(err.message)
@@ -30,7 +29,6 @@ app.get('/', (req,res) =>  {
           )
       }
     })
-    connection.end()
   })
 
 app.listen(port, ()=> {
